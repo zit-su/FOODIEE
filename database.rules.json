@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "orders": { "$orderId": {
+      ".read": true,
+      ".write": true,
+      ".validate": "newData.hasChildren(['id', 'status', 'total']) && newData.child('id').isString() && newData.child('total').isNumber() && (newData.child('status').val() == 'confirmed' || newData.child('status').val() == 'preparing' || newData.child('status').val() == 'on_the_way' || newData.child('status').val() == 'delivered')"
+    } },
+    "riderLocations": { "$orderId": {
+      ".read": true,
+      ".write": true,
+      ".validate": "newData.hasChildren(['lat', 'lng', 'updatedAt']) && newData.child('lat').isNumber() && newData.child('lng').isNumber()"
+    } },
+    "riderPresence": { "$orderId": { ".read": true, ".write": true } }
+  }
+}
